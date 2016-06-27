@@ -106,7 +106,7 @@ export default class ToggleButton extends Component {
 
   static defaultProps = {
     checked: false,
-    onChange: () => {},
+    onToggle: () => {},
     colors: defaultColors,
     checkedLabel: 'ON',
     checkedLabelStyle: emptyStyle,
