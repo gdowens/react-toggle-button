@@ -1,2 +1,6 @@
-
-export default from './react-toggle-button';
+import ToggleButton, { rgb, ToggleStyle } from './react-toggle-button'
+export {
+  ToggleButton as default,
+  rgb,
+  ToggleStyle
+}

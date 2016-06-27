@@ -38,6 +38,8 @@ const defaultColors = {
   },
 }
 
+export const rgb = rgbToHex
+
 export class ToggleStyle {
   constructor(base, hover) {
     this._base = base
@@ -63,7 +65,7 @@ export class ToggleStyle {
 
 const emptyStyle = new ToggleStyle({})
 
-class ToggleButton extends Component {
+export default class ToggleButton extends Component {
 
   constructor(props) {
     super(props)
@@ -275,6 +277,3 @@ class ToggleButton extends Component {
     )
   }
 }
-
-export default ToggleButton
-export const rgb = rgbToHex
