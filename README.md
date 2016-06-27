@@ -1,6 +1,6 @@
 # react-toggle-button
 
-## Getting Started
+### Getting Started
 
 #### Step 1
 Go here: https://gdowens.github.io/react-toggle-button/
