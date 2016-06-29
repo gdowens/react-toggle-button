@@ -1,6 +1,6 @@
 {
   "name": "react-toggle-button",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "A React Component.",
   "main": "./lib/index.js",
   "scripts": {
@@ -53,12 +53,12 @@
     "react-addons-css-transition-group": "^15.1.0",
     "react-addons-perf": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
+    "react-dom": "^15.1.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
   "peerDependencies": {
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react": ">=0.13.2 || ^0.14 || ^15.0.0"
   },
   "dependencies": {
     "react-motion": "^0.4.4"

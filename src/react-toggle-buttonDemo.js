@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import ToggleButton, { ToggleStyle, rgb } from './react-toggle-button';
+import ToggleButton from './react-toggle-button';
 import { X, Check } from './iconExamples'
 
 const styles = {
@@ -69,26 +69,26 @@ const styles = {
 const codeExamples = [{
   // EXAMPLE 1
   code: `<ToggleButton
-  checked={ self.state.checked || false }
-  onToggle={(checked) => {
+  value={ self.state.value || false }
+  onToggle={(value) => {
     self.setState({
-      checked: !checked,
+      value: !value,
     })
   }} />`,
   description: `// ToggleButton requires only two props...
 
 
-// 'checked', the state of the button.
+// 'value', the state of the button.
 
 // 'onToggle', called on each click, is given the current state
 //  of the button.`,
   example: (self) => {
     return (
       <ToggleButton
-        checked={self.state.checked}
-        onToggle={(checked) => {
+        value={self.state.value}
+        onToggle={(value) => {
           self.setState({
-            checked: !checked,
+            value: !value,
           })
         }} />
     )
@@ -96,65 +96,60 @@ const codeExamples = [{
 }, {
   // EXAMPLE 2
   code: `<ToggleButton
-  unCheckedLabel={<X/>}
-  checkedLabel={<Check/>}
-  checked={self.state.checked}
-  onToggle={(checked) => {
+  inactiveLabel={<X/>}
+  activeLabel={<Check/>}
+  value={self.state.value}
+  onToggle={(value) => {
     self.setState({
-      checked: !checked,
+      value: !value,
     })
   }} />`,
   description: `// Different labels example...
 
-// 'uncheckedLabel' - a string or component to display when OFF.
-// 'checkedLabel' - a string or component to display when ON.`,
+// 'inactiveLabel' - a string or component to display when OFF.
+// 'activeLabel' - a string or component to display when ON.`,
   example: (self) => {
     return (
       <ToggleButton
-        checked={self.state.checked2}
-        unCheckedLabel={<X/>}
-        checkedLabel={<Check/>}
-        onToggle={(checked) => {
+        value={self.state.value2}
+        inactiveLabel={<X/>}
+        activeLabel={<Check/>}
+        onToggle={(value) => {
           self.setState({
-            checked2: !checked,
+            value2: !value,
           })
         }} />
     )
   }
 }, {
   // EXAMPLE 3
-  code: `// 'rgb' turns your colors into a hex value
-import {rgb} from 'react-toggle-button'
-
-  // ...
-
-<ToggleButton
-  unCheckedLabel={''}
-  checkedLabel={''}
+  code: `<ToggleButton
+  inactiveLabel={''}
+  activeLabel={''}
   colors={{
-    checkedThumb: {
-      base: rgb(250,250,250),
+    activeThumb: {
+      base: 'rgb(250,250,250)',
     },
-    unCheckedThumb: {
-      base: rgb(62,130,247),
+    inactiveThumb: {
+      base: 'rgb(62,130,247)',
     },
-    checked: {
-      base: rgb(207,221,245),
-      hover: rgb(177, 191, 215),
+    active: {
+      base: 'rgb(207,221,245)',
+      hover: 'rgb(177, 191, 215)',
     },
-    unChecked: {
-      base: rgb(65,66,68),
-      hover: rgb(95,96,98),
+    inactive: {
+      base: 'rgb(65,66,68)',
+      hover: 'rgb(95,96,98)',
     }
   }}
-  trackStyles={new ToggleStyle(styles.trackStyle)}
-  thumbStyle={new ToggleStyle(styles.thumbStyle)}
+  trackStyle={styles.trackStyle}
+  thumbStyle={styles.thumbStyle}
   thumbAnimateRange={[-10, 36]}
   thumbIcon={<ThumbIcon/>}
-  checked={self.state.checked}
-  onToggle={(checked) => {
+  value={self.state.value}
+  onToggle={(value) => {
     self.setState({
-      checked: !checked,
+      value: !value,
     })
   }} />`,
   description: `// Material Design example...
@@ -164,34 +159,34 @@ import {rgb} from 'react-toggle-button'
   example: (self) => {
     return (
       <ToggleButton
-        checked={self.state.checked3}
-        unCheckedLabel={''}
-        checkedLabel={''}
+        value={self.state.value3}
+        inactiveLabel={''}
+        activeLabel={''}
         colors={{
-          checkedThumb: {
-            base: rgb(250,250,250),
+          activeThumb: {
+            base: `rgb(250,250,250)`,
           },
-          unCheckedThumb: {
-            base: rgb(62,130,247),
+          inactiveThumb: {
+            base: `rgb(62,130,247)`,
           },
-          checked: {
-            base: rgb(207,221,245),
-            hover: rgb(177, 191, 215),
+          active: {
+            base: `rgb(207,221,245)`,
+            hover: `rgb(177, 191, 215)`,
           },
-          unChecked: {
-            base: rgb(65,66,68),
-            hover: rgb(95,96,98),
+          inactive: {
+            base: `rgb(65,66,68)`,
+            hover: `rgb(95,96,98)`,
           }
         }}
-        trackStyle={new ToggleStyle({
+        trackStyle={{
           height: 15,
-        })}
-        thumbStyle={new ToggleStyle({
+        }}
+        thumbStyle={{
           position: 'absolute',
           width: 30,
           height: 30,
           boxShadow: `0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24)`
-        })}
+        }}
         thumbAnimateRange={[-10, 36]}
         thumbIcon={(
           <div style={{
@@ -202,9 +197,9 @@ import {rgb} from 'react-toggle-button'
               <Check/>
           </div>)
         }
-        onToggle={(checked) => {
+        onToggle={(value) => {
           self.setState({
-            checked3: !checked,
+            value3: !value,
           })
         }} />
     )
@@ -213,7 +208,8 @@ import {rgb} from 'react-toggle-button'
   // EXAMPLE 4
   code: `<ToggleButton
   // ... same props as above
-  thumbStyle={new ToggleStyle(styles.thumbStyle, styles.thumbStyleHover)}
+  thumbStyle={styles.thumbStyle}
+  thumbStyleHover={styles.thumbStyleHover}
   animateThumbStyleHover={(n) => {
     return {
       boxShadow: \`0 0 \${2 + 4*n}px rgba(0,0,0,.16),0 \${2 + 3*n}px \${4 + 8*n}px rgba(0,0,0,.32)\`,
@@ -227,29 +223,29 @@ import {rgb} from 'react-toggle-button'
   example: (self) => {
     return (
       <ToggleButton
-        checked={self.state.checked4}
-        unCheckedLabel={''}
-        checkedLabel={''}
+        value={self.state.value4}
+        inactiveLabel={''}
+        activeLabel={''}
         colors={{
-          checkedThumb: {
-            base: rgb(250,250,250),
+          activeThumb: {
+            base: `rgb(250,250,250)`,
           },
-          unCheckedThumb: {
-            base: rgb(62,130,247),
+          inactiveThumb: {
+            base: `rgb(62,130,247)`,
           },
-          checked: {
-            base: rgb(207,221,245),
-            hover: rgb(177, 191, 215),
+          active: {
+            base: `rgb(207,221,245)`,
+            hover: `rgb(177, 191, 215)`,
           },
-          unChecked: {
-            base: rgb(65,66,68),
-            hover: rgb(95,96,98),
+          inactive: {
+            base: `rgb(65,66,68)`,
+            hover: `rgb(95,96,98)`,
           }
         }}
-        trackStyle={new ToggleStyle({
+        trackStyle={{
           height: 15,
-        })}
-        thumbStyle={new ToggleStyle({
+        }}
+        thumbStyle={{
           position: 'absolute',
           width: 30,
           height: 30,
@@ -258,10 +254,11 @@ import {rgb} from 'react-toggle-button'
           borderRadius: 15,
           alignItems: 'center',
           justifyContent: 'center',
-        }, {
+        }}
+        thumbStyleHover={{
           width: 32,
           height: 32,
-        })}
+        }}
         thumbAnimateRange={[-10, 36]}
         animateThumbStyleHover={(n) => {
           return {
@@ -273,42 +270,42 @@ import {rgb} from 'react-toggle-button'
               <Check/>
           </div>)
         }
-        onToggle={(checked) => {
+        onToggle={(value) => {
           self.setState({
-            checked4: !checked,
+            value4: !value,
           })
         }} />
     )
   }
 },{
   // EXAMPLE 5
-  code: `const borderRadiusStyle = new ToggleStyle({ borderRadius: 2 })
+  code: `const borderRadiusStyle = { borderRadius: 2 }
 
 // ... some lines of code later
 
 <ToggleButton
-  checked={ self.state.checked || false }
+  value={ self.state.value || false }
   thumbStyle={borderRadiusStyle}
   trackStyle={borderRadiusStyle}
-  onToggle={(checked) => {
+  onToggle={(value) => {
     self.setState({
-      checked: !checked,
+      value: !value,
     })
   }} />`,
   description: `// A square toggle, just for funsies...`,
   example: (self) => {
     return (
       <ToggleButton
-        checked={self.state.checked5}
-        thumbStyle={new ToggleStyle({
+        value={self.state.value5}
+        thumbStyle={{
           borderRadius: 2,
-        })}
-        trackStyle={new ToggleStyle({
+        }}
+        trackStyle={{
           borderRadius: 2,
-        })}
-        onToggle={(checked) => {
+        }}
+        onToggle={(value) => {
           self.setState({
-            checked5: !checked,
+            value5: !value,
           })
         }} />
     )
@@ -348,11 +345,11 @@ class ToggleButtonDemo extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      checked: false,
-      checked2: false,
-      checked3: false,
-      checked4: false,
-      checked5: false,
+      value: false,
+      value2: false,
+      value3: false,
+      value4: false,
+      value5: false,
     }
   }
 
@@ -397,20 +394,7 @@ var ToggleButton = require('react-toggle-button')`}
         <div style={{marginBottom: 50}}/>
         <h1 style={styles.subTitleStyle}> React Toggle Button API </h1>
         <pre style={{...styles.codeBlock, marginBottom: 20}}>
-          {`import ToggleButton, {
-  /**
-   * colors props need to be in hex, use this to conveniently enter rgb
-   * values.
-   */
-  rgb,
-  /**
-   * Use for style props
-   *
-   * new ToggleStyle(activeStyle)
-   * new ToggleStyle(activeStyle, hoverStyle)
-   */
-  ToggleStyle,
-}
+          {`import ToggleButton from 'react-toggle-button'
 
 /**
  * 'react-toggle-button' PropTypes
@@ -422,11 +406,11 @@ ToggleButton.propTypes = {
   //
   //
 
-  checked: React.PropTypes.bool.isRequired,
+  value: React.PropTypes.bool.isRequired,
   /**
    * Called during onClick
    * 1. triggers 'focus' and 'click' on internal checkbox
-   * 2. calls onToggle(this.props.checked)
+   * 2. calls onToggle(this.props.active)
    */
   onToggle: React.PropTypes.func.isRequired,
 
@@ -436,7 +420,7 @@ ToggleButton.propTypes = {
   //
   //
   /**
-   * Object with four properties { checked, unChecked, checkedThumb, unCheckedThumb }
+   * Object with four properties { active, inactive, activeThumb, inactiveThumb }
    *
    * each property should have a 'base' key and a 'hover' key
    * ( if hover is undefined, that property will use the base value )
@@ -448,29 +432,35 @@ ToggleButton.propTypes = {
   /**
    * The label used inside the track, can also take a component
    *
-   * checkedLabel (defaultValue: 'ON')
-   * unCheckedLabel (defaultValue: 'OFF')
+   * activeLabel (defaultValue: 'ON')
+   * inactiveLabel (defaultValue: 'OFF')
    */
-  checkedLabel: React.PropTypes.oneOfType([
+  activeLabel: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.object,
   ]),
-  unCheckedLabel: React.PropTypes.oneOfType([
+  inactiveLabel: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.object,
   ]),
 
 
   /**
-   * These props require a ToggleStyle
-   * eg. new ToggleStyle(activeStyle, hoverStyle)
+   * These props specify style,
+   * hover style is used during mouseOver event
+   *
    *
    */
-  checkedLabelStyle: React.PropTypes.instanceOf(ToggleStyle),
-  checkedThumbStyle: React.PropTypes.instanceOf(ToggleStyle),
-  unCheckedLabelStyle: React.PropTypes.instanceOf(ToggleStyle),
-  thumbStyle: React.PropTypes.instanceOf(ToggleStyle),
-  trackStyle: React.PropTypes.instanceOf(ToggleStyle),
+  activeLabelStyle: React.PropTypes.object,
+  activeLabelStyleHover: React.PropTypes.object,
+  activeThumbStyle: React.PropTypes.object,
+  activeThumbStyleHover: React.PropTypes.object,
+  inactiveLabelStyle: React.PropTypes.object,
+  inactiveLabelStyleHover: React.PropTypes.object,
+  thumbStyle: React.PropTypes.object,
+  thumbStyleHover: React.PropTypes.object,
+  trackStyle: React.PropTypes.object,
+  trackStyleHover: React.PropTypes.object,
 
 
   /**
@@ -500,7 +490,6 @@ ToggleButton.propTypes = {
     React.PropTypes.string,
     React.PropTypes.object,
   ]),
-
 
   /**
    * The range to move the thumb on toggle [starting, ending]

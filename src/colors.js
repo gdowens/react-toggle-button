@@ -58,6 +58,31 @@ export function hexToRGB(c) {
   return ret;
 }
 
+export function rgbToObj(s) {
+  const rgb = s.indexOf('rgb') != -1
+  const rgba = s.indexOf('rgba') != -1
+  const match = s.match(/\d+/g)
+  if (rgb && !rgba) {
+    return {
+      r: parseInt(match[0]),
+      g: parseInt(match[1]),
+      b: parseInt(match[2]),
+    }
+  }
+
+  if (rgb && rgba) {
+    const aString = match[3] == '0' ? `0.${match[4]}` : match[3]
+    return {
+      r: parseInt(match[0]),
+      g: parseInt(match[1]),
+      b: parseInt(match[2]),
+      a: parseFloat(aString)
+    }
+  }
+
+  return null
+}
+
 export function rgbToHex(red, green, blue) {
   let r = red.toString(16);
   let g = green.toString(16);
@@ -83,14 +108,17 @@ export function mapValueInRange(value, fromLow, fromHigh, toLow, toHigh) {
   return toLow + (valueScale * toRangeSize);
 }
 
+
 // Interpolate two hex colors in a 0 - 1 range or optionally provide a
 // custom range with fromLow,fromHight. The output will be in hex by default
 // unless asRGB is true in which case it will be returned as an rgb string.
-export function interpolateColor(val, start, end, low, high, asRGB) {  
+// if input is rgb then it will also be returned as rgb
+export function interpolateColor(val, start, end, low, high, asRGB) {
   let fromLow = low === undefined ? 0 : low;
   let fromHigh = high === undefined ? 1 : high;
-  let startColor = hexToRGB(start);
-  let endColor = hexToRGB(end);
+
+  let startColor = rgbToObj(start);
+  let endColor = rgbToObj(end);
   let r = Math.floor(
     mapValueInRange(val, fromLow, fromHigh, startColor.r, endColor.r)
   );
@@ -100,8 +128,17 @@ export function interpolateColor(val, start, end, low, high, asRGB) {
   let b = Math.floor(
     mapValueInRange(val, fromLow, fromHigh, startColor.b, endColor.b)
   );
-  if (asRGB) {
-    return 'rgb(' + r + ',' + g + ',' + b + ')';
+
+  let asRGBA = false
+  let a = null
+  if (startColor.a && endColor.a) {
+    asRGBA = true
+    a = mapValueInRange(val, fromLow, fromHigh, startColor.a, endColor.a)
   }
-  return rgbToHex(r, g, b);
+
+  if (!a) {
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  } else {
+    return 'rgb(' + r + ',' + g + ',' + b + ',' + a + ')';
+  }
 }

@@ -15,55 +15,31 @@ import {
 
 import {
   rgbToHex,
+  hexToRGB,
   interpolateColor,
   mapValueInRange,
 } from './colors'
 
 const defaultColors = {
-  checked: {
-    base: rgbToHex(1,124,66),
-    hover: rgbToHex(1,124,66),
+  active: {
+    base: `rgb(1,124,66)`,
+    hover: `rgb(1,124,66)`,
   },
-  unChecked: {
-    base: rgbToHex(65,66,68),
-    hover: rgbToHex(65,66,68),
+  inactive: {
+    base: `rgb(65,66,68)`,
+    hover: `rgb(65,66,68)`,
   },
-  checkedThumb: {
-    base: rgbToHex(250,250,250),
-    hover: rgbToHex(250,250,250),
+  activeThumb: {
+    base: `rgb(250,250,250)`,
+    hover: `rgb(250,250,250)`,
   },
-  unCheckedThumb: {
-    base: rgbToHex(250,250,250),
-    hover: rgbToHex(250,250,250),
+  inactiveThumb: {
+    base: `rgb(250,250,250)`,
+    hover: `rgb(250,250,250)`,
   },
 }
 
-export const rgb = rgbToHex
-
-export class ToggleStyle {
-  constructor(base, hover) {
-    this._base = base
-    this._hover = hover
-  }
-
-  set base(_base) {
-    this._base = _base
-  }
-
-  set hover(_hover) {
-    this._hover = _hover || this.base
-  }
-
-  get base() {
-    return this._base || {}
-  }
-
-  get hover() {
-    return this._hover || {}
-  }
-}
-
-const emptyStyle = new ToggleStyle({})
+const emptyStyle = {}
 
 export default class ToggleButton extends Component {
 
@@ -75,22 +51,27 @@ export default class ToggleButton extends Component {
   }
 
   static propTypes = {
-    checked: React.PropTypes.bool.isRequired,
+    value: React.PropTypes.bool.isRequired,
     onToggle: React.PropTypes.func.isRequired,
     colors: React.PropTypes.object,
-    checkedLabel: React.PropTypes.oneOfType([
+    activeLabel: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.object,
     ]),
-    checkedLabelStyle: React.PropTypes.instanceOf(ToggleStyle),
-    checkedThumbStyle: React.PropTypes.instanceOf(ToggleStyle),
-    unCheckedLabel: React.PropTypes.oneOfType([
+    activeLabelStyle: React.PropTypes.object,
+    activeLabelStyleHover: React.PropTypes.object,
+    activeThumbStyle: React.PropTypes.object,
+    activeThumbStyleHover: React.PropTypes.object,
+    inactiveLabel: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.object,
     ]),
-    unCheckedLabelStyle: React.PropTypes.instanceOf(ToggleStyle),
-    thumbStyle: React.PropTypes.instanceOf(ToggleStyle),
-    trackStyle: React.PropTypes.instanceOf(ToggleStyle),
+    inactiveLabelStyle: React.PropTypes.object,
+    inactiveLabelStyleHover: React.PropTypes.object,
+    thumbStyle: React.PropTypes.object,
+    thumbStyleHover: React.PropTypes.object,
+    trackStyle: React.PropTypes.object,
+    trackStyleHover: React.PropTypes.object,
     animateThumbStyleHover: React.PropTypes.func,
     animateTrackStyleHover: React.PropTypes.func,
     animateTrackStyleToggle: React.PropTypes.func,
@@ -105,17 +86,21 @@ export default class ToggleButton extends Component {
   }
 
   static defaultProps = {
-    checked: false,
+    value: false,
     onToggle: () => {},
     colors: defaultColors,
-    checkedLabel: 'ON',
-    checkedLabelStyle: emptyStyle,
-    unCheckedLabel: 'OFF',
-    unCheckedLabelStyle: emptyStyle,
+    activeLabel: 'ON',
+    activeLabelStyle: emptyStyle,
+    activeLabelStyleHover: emptyStyle,
+    inactiveLabel: 'OFF',
+    inactiveLabelStyle: emptyStyle,
+    inactiveLabelStyleHover: emptyStyle,
     thumbStyle: emptyStyle,
+    thumbStyleHover: emptyStyle,
     animateThumbStyleHover: () => { return {} },
     animateThumbStyleToggle: () => { return {} },
     trackStyle: emptyStyle,
+    trackStyleHover: emptyStyle,
     animateTrackStyleHover: () => { return {} },
     animateTrackStyleToggle: () => { return {} },
     thumbAnimateRange: [1, 33],
@@ -139,6 +124,35 @@ export default class ToggleButton extends Component {
     this.setState({ isHover: false })
   }
 
+  _convertToRgb(color, defaultColor) {
+    if (color.indexOf('#') != -1) {
+      const rgbObj = hexToRGB(color)
+      return `rgb(${rgbObj.r}, ${rgbObj.g}, ${rgbObj.b})`
+    } else if (color.indexOf('rgb') == -1) {
+      return defaultColor //something weird, so it's going to be defaulted
+    } else {
+      return color
+    }
+  }
+
+  /**
+   * Goes through all colors in obj and converts them to proper format or default
+   * @param  {[type]} colors [description]
+   * @return {[type]}        [description]
+   */
+  checkAllColors(colors) {
+    Object.keys(colors).forEach((key) => {
+      this.checkColors(colors, key)
+    })
+    return colors
+  }
+
+  /**
+   * Make sure a color is an rgb or rgba value
+   * @param  {[type]} colors [description]
+   * @param  {[type]} key    [description]
+   * @return {[type]}        [description]
+   */
   checkColors(colors, key) {
     if (!colors[key]){
       colors[key] = defaultColors[key]
@@ -147,21 +161,25 @@ export default class ToggleButton extends Component {
         console.warn('Color prop should have a "base" style and a "hover" style!')
         colors[key] = defaultColors[key]
       } else {
+        colors[key].base = this._convertToRgb(colors[key].base, defaultColors[key].base)
         colors[key].hover = colors[key].base
       }
+    } else {
+      colors[key].base = this._convertToRgb(colors[key].base, defaultColors[key].base)
+      colors[key].hover = this._convertToRgb(colors[key].hover, defaultColors[key].hover)
     }
   }
 
-  interpolateColorWithHover(colorNumber, checkKey, unCheckKey) {
+  interpolateColorWithHover(colorNumber, activeKey, inactiveKey) {
     const colors = this.props.colors
-    this.checkColors(colors, checkKey)
-    this.checkColors(colors, unCheckKey)
+    this.checkColors(colors, activeKey)
+    this.checkColors(colors, inactiveKey)
     if (this.state.isHover) {
       return {
         backgroundColor: interpolateColor(
           colorNumber,
-          colors[checkKey].hover,
-          colors[unCheckKey].hover,
+          colors[activeKey].hover,
+          colors[inactiveKey].hover,
           0, 400
         )
       }
@@ -169,8 +187,8 @@ export default class ToggleButton extends Component {
       return {
         backgroundColor: interpolateColor(
           colorNumber,
-          colors[checkKey].base,
-          colors[unCheckKey].base,
+          colors[activeKey].base,
+          colors[inactiveKey].base,
           0, 400
         )
       }
@@ -194,8 +212,6 @@ export default class ToggleButton extends Component {
       this._input.focus()
       this._input.click()
     }
-
-    this.props.onToggle(this.props.checked)
   }
 
   render() {
@@ -203,13 +219,13 @@ export default class ToggleButton extends Component {
     const HoverSpringConfig = this.props.internalHoverSpringSetting
     return (
       <Motion style={{
-          opacity: spring(this.props.checked ? 1 : 0, SpringConfig),
+          opacity: spring(this.props.value ? 1 : 0, SpringConfig),
           left: spring(
-            this.props.checked ? this.props.thumbAnimateRange[1]*10 : this.props.thumbAnimateRange[0]*10,
+            this.props.value ? this.props.thumbAnimateRange[1]*10 : this.props.thumbAnimateRange[0]*10,
             SpringConfig
           ),
-          colorNumber: spring(this.props.checked ? 0 : 400, SpringConfig),
-          toggleNumber: spring(this.state.checked ? 400 : 0, SpringConfig),
+          colorNumber: spring(this.props.value ? 0 : 400, SpringConfig),
+          toggleNumber: spring(this.props.value ? 400 : 0, SpringConfig),
           hoverNumber: spring(this.state.isHover ? 400 : 0, HoverSpringConfig),
       }}>
       {({ opacity, left, colorNumber, hoverNumber, toggleNumber }) =>
@@ -220,42 +236,42 @@ export default class ToggleButton extends Component {
           <div style={{
               ...this.makeStyle({
                 ...reactToggleTrack,
-                ...this.props.trackStyle.base,
-                ...this.interpolateColorWithHover(colorNumber, 'checked', 'unChecked'),
+                ...this.props.trackStyle,
+                ...this.interpolateColorWithHover(colorNumber, 'active', 'inactive'),
                 ...this.props.animateTrackStyleToggle(toggleNumber/400.0),
               }, {
-                ...this.props.trackStyle.hover,
+                ...this.props.trackStyleHover,
               ...this.props.animateTrackStyleHover(hoverNumber/400.0),
               }),
             }}>
             <div style={{
                 ...this.makeStyle({
                   ...reactToggleOn,
-                  ...this.props.checkedLabelStyle.base,
-                }, this.props.checkedLabelStyle.hover),
+                  ...this.props.activeLabelStyle,
+                }, this.props.activeLabelStyleHover),
                 opacity: opacity,
               }}>
-              {this.props.checkedLabel}
+              {this.props.activeLabel}
             </div>
             <div style={{
               ...this.makeStyle({
                 ...reactToggleOff,
-                ...this.props.unCheckedLabelStyle.base,
-              }, this.props.unCheckedLabelStyle.hover),
+                ...this.props.inactiveLabelStyle,
+              }, this.props.inactiveLabelStyleHover),
               opacity: 1 - opacity,
               }}>
-              {this.props.unCheckedLabel}
+              {this.props.inactiveLabel}
             </div>
           </div>
           <div style={reactThumbCenteringContainer}>
             <div style={{
                 ...this.makeStyle({
                   ...reactToggleThumb,
-                  ...this.props.thumbStyle.base,
-                  ...this.interpolateColorWithHover(colorNumber, 'checkedThumb', 'unCheckedThumb'),
+                  ...this.props.thumbStyle,
+                  ...this.interpolateColorWithHover(colorNumber, 'activeThumb', 'inactiveThumb'),
                   ...this.props.animateThumbStyleToggle(toggleNumber/400.0),
                 }, {
-                  ...this.props.thumbStyle.hover,
+                  ...this.props.thumbStyleHover,
                   ...this.props.animateThumbStyleHover(hoverNumber/400.0),
                 }),
                 position: 'relative',
@@ -270,6 +286,13 @@ export default class ToggleButton extends Component {
             }}
             type="checkbox"
             style={reactToggleScreenReaderOnly}
+            onClick={(evt) => {
+              if (this.props.onClick) {
+                this.props.onClick(evt)
+              }
+
+              this.props.onToggle(this.props.value)
+            }}
             {...this.props} />
         </div>
       }
