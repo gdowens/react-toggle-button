@@ -58,6 +58,7 @@ export default class ToggleButton extends Component {
       React.PropTypes.string,
       React.PropTypes.object,
     ]),
+    containerStyle: React.PropTypes.object,
     activeLabelStyle: React.PropTypes.object,
     activeLabelStyleHover: React.PropTypes.object,
     activeThumbStyle: React.PropTypes.object,
@@ -90,6 +91,7 @@ export default class ToggleButton extends Component {
     onToggle: () => {},
     colors: defaultColors,
     activeLabel: 'ON',
+    containerStyle: emptyStyle,
     activeLabelStyle: emptyStyle,
     activeLabelStyleHover: emptyStyle,
     inactiveLabel: 'OFF',
@@ -229,7 +231,12 @@ export default class ToggleButton extends Component {
           hoverNumber: spring(this.state.isHover ? 400 : 0, HoverSpringConfig),
       }}>
       {({ opacity, left, colorNumber, hoverNumber, toggleNumber }) =>
-        <div style={reactToggle}
+        <div style={{
+            ...this.makeStyle({
+              ...reactToggle,
+              ...this.props.containerStyle,
+            })
+          }}
           onMouseOver={this.onMouseOver.bind(this)}
           onMouseOut={this.onMouseOut.bind(this)}
           onClick={this.handleClick.bind(this)}>
