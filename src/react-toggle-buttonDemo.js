@@ -495,6 +495,20 @@ ToggleButton.propTypes = {
    * The range to move the thumb on toggle [starting, ending]
    */
   thumbAnimateRange: React.PropTypes.array,
+
+  /**
+   * If you want to put some props on the underlying <input> element
+   * you can pass them through this prop.
+   *
+   * Example:
+   *
+   *  passThroughInputProps={{
+   *   	onChange: () => console.log('Hello!')
+   *  }}
+   *
+   */
+   passThroughInputProps: React.PropTypes.object,
+
 }`}
         </pre>
       </div>
