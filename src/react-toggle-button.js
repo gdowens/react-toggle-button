@@ -53,6 +53,7 @@ export default class ToggleButton extends Component {
   static propTypes = {
     value: React.PropTypes.bool.isRequired,
     onToggle: React.PropTypes.func.isRequired,
+    onClick: React.PropTypes.func,
     colors: React.PropTypes.object,
     activeLabel: React.PropTypes.oneOfType([
       React.PropTypes.string,
@@ -300,7 +301,7 @@ export default class ToggleButton extends Component {
 
               this.props.onToggle(this.props.value)
             }}
-            {...this.props} />
+            value={this.props.value} />
         </div>
       }
     </Motion>

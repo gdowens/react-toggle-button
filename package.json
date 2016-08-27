@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com"
+    "url": "https://github.com/gdowens/react-toggle-button"
   },
   "keywords": {
     "keywords": [
@@ -50,10 +50,11 @@
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
     "jest-cli": "^13.0.0",
+    "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.1.0",
     "react-addons-perf": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
-    "react-dom": "^15.1.0",
+    "react-dom": "^15.3.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
