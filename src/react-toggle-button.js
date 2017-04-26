@@ -242,8 +242,7 @@ export default class ToggleButton extends Component {
             })
           }}
           onMouseOver={this.onMouseOver.bind(this)}
-          onMouseOut={this.onMouseOut.bind(this)}
-          onClick={this.handleClick.bind(this)}>
+          onMouseOut={this.onMouseOut.bind(this)}>
           <div style={{
               ...this.makeStyle({
                 ...reactToggleTrack,

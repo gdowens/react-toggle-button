@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gdowens/react-toggle-button"
+    "url": "https://github.com/GinjiBan/react-toggle-button"
   },
   "keywords": {
     "keywords": [
@@ -26,9 +26,9 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gdowens/react-toggle-button/issues"
+    "url": "https://github.com/GinjiBan/react-toggle-button/issues"
   },
-  "homepage": "https://github.com/gdowens/react-toggle-button#readme",
+  "homepage": "https://github.com/GinjiBan/react-toggle-button#readme",
   "jest": {
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
