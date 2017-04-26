@@ -2,16 +2,13 @@ jest.unmock('../src/index');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import renderer from 'react-test-renderer';
 import index from '../src/index'
 
 describe('<index />', () => {
   it('', () => {
-    const renderer = TestUtils.createRenderer();
-    renderer.render(
+    renderer.create(
       <index />
     );
-    const dom = renderer.getRenderOutput();
-    //expect(dom.props.//PROPS_NAME).toEqual('//TEXT');
   });
 });

@@ -55,7 +55,6 @@ export default class ToggleButton extends Component {
     value: PropTypes.bool.isRequired,
     onToggle: PropTypes.func.isRequired,
     passThroughInputProps: PropTypes.object,
-    onClick: PropTypes.func,
     colors: PropTypes.object,
     activeLabel: PropTypes.oneOfType([
       PropTypes.string,
