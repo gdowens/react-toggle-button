@@ -1,6 +1,6 @@
 {
-  "name": "react-toggle-button",
-  "version": "2.1.1",
+  "name": "reactjs-toggle-button",
+  "version": "2.1.2",
   "description": "A React Component.",
   "main": "./lib/index.js",
   "scripts": {
@@ -59,7 +59,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "peerDependencies": {
-    "react": ">=0.13.2 || ^0.14 || ^15.0.0"
+    "react": "^15.3.1"
   },
   "dependencies": {
     "prop-types": "^15.5.8",
