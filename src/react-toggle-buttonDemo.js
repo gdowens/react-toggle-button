@@ -406,13 +406,13 @@ ToggleButton.propTypes = {
   //
   //
 
-  value: React.PropTypes.bool.isRequired,
+  value: PropTypes.bool.isRequired,
   /**
    * Called during onClick
    * 1. triggers 'focus' and 'click' on internal checkbox
    * 2. calls onToggle(this.props.active)
    */
-  onToggle: React.PropTypes.func.isRequired,
+  onToggle: PropTypes.func.isRequired,
 
   //
   //
@@ -426,7 +426,7 @@ ToggleButton.propTypes = {
    * ( if hover is undefined, that property will use the base value )
    *
    */
-  colors: React.PropTypes.object,
+  colors: PropTypes.object,
 
 
   /**
@@ -435,13 +435,13 @@ ToggleButton.propTypes = {
    * activeLabel (defaultValue: 'ON')
    * inactiveLabel (defaultValue: 'OFF')
    */
-  activeLabel: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
+  activeLabel: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
   ]),
-  inactiveLabel: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
+  inactiveLabel: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
   ]),
 
 
@@ -451,16 +451,16 @@ ToggleButton.propTypes = {
    *
    *
    */
-  activeLabelStyle: React.PropTypes.object,
-  activeLabelStyleHover: React.PropTypes.object,
-  activeThumbStyle: React.PropTypes.object,
-  activeThumbStyleHover: React.PropTypes.object,
-  inactiveLabelStyle: React.PropTypes.object,
-  inactiveLabelStyleHover: React.PropTypes.object,
-  thumbStyle: React.PropTypes.object,
-  thumbStyleHover: React.PropTypes.object,
-  trackStyle: React.PropTypes.object,
-  trackStyleHover: React.PropTypes.object,
+  activeLabelStyle: PropTypes.object,
+  activeLabelStyleHover: PropTypes.object,
+  activeThumbStyle: PropTypes.object,
+  activeThumbStyleHover: PropTypes.object,
+  inactiveLabelStyle: PropTypes.object,
+  inactiveLabelStyleHover: PropTypes.object,
+  thumbStyle: PropTypes.object,
+  thumbStyleHover: PropTypes.object,
+  trackStyle: PropTypes.object,
+  trackStyleHover: PropTypes.object,
 
 
   /**
@@ -469,32 +469,32 @@ ToggleButton.propTypes = {
    *
    * No Hover -> Hover :  0 -> 1 : No Toggle -> Toggle
    */
-  animateThumbStyleHover: React.PropTypes.func,
-  animateTrackStyleHover: React.PropTypes.func,
-  animateTrackStyleToggle: React.PropTypes.func,
-  animateThumbStyleToggle: React.PropTypes.func,
+  animateThumbStyleHover: PropTypes.func,
+  animateTrackStyleHover: PropTypes.func,
+  animateTrackStyleToggle: PropTypes.func,
+  animateThumbStyleToggle: PropTypes.func,
 
 
   /**
    * passes through internal spring settings for react-motion
    * { stiffness, damping }
    */
-  internalSpringSetting: React.PropTypes.object,
-  internalHoverSpringSetting: React.PropTypes.object,
+  internalSpringSetting: PropTypes.object,
+  internalHoverSpringSetting: PropTypes.object,
 
 
   /**
    * Optional if one wants an icon inside the thumb, take a string or component
    */
-  thumbIcon: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
+  thumbIcon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
   ]),
 
   /**
    * The range to move the thumb on toggle [starting, ending]
    */
-  thumbAnimateRange: React.PropTypes.array,
+  thumbAnimateRange: PropTypes.array,
 
   /**
    * If you want to put some props on the underlying <input> element
@@ -507,7 +507,7 @@ ToggleButton.propTypes = {
    *  }}
    *
    */
-   passThroughInputProps: React.PropTypes.object,
+   passThroughInputProps: PropTypes.object,
 
 }`}
         </pre>

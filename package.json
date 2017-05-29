@@ -1,6 +1,6 @@
 {
   "name": "react-toggle-button",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A React Component.",
   "main": "./lib/index.js",
   "scripts": {
@@ -50,11 +50,10 @@
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
     "jest-cli": "^13.0.0",
-    "react": "^15.3.1",
-    "react-addons-css-transition-group": "^15.1.0",
-    "react-addons-perf": "^15.1.0",
-    "react-addons-test-utils": "^15.1.0",
-    "react-dom": "^15.3.1",
+    "react": "^15.5.0",
+    "react-addons-perf": "^15.4.2",
+    "react-addons-test-utils": "^15.5.0",
+    "react-dom": "^15.5.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
@@ -62,6 +61,6 @@
     "react": ">=0.13.2 || ^0.14 || ^15.0.0"
   },
   "dependencies": {
-    "react-motion": "^0.4.4"
+    "react-motion": "^0.5.0"
   }
 }
