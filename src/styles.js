@@ -1,8 +1,9 @@
 export const reactToggle = {
+  display: '-webkit-flex',
   display: 'flex',
   width: 52,
-  alignItems: 'center',
-  justifyContent: 'flex-start',
+  WebkitAlignItems: 'center',
+  WebkitJustifyContent: 'flex-start',
   position: 'relative',
   cursor: 'pointer',
   backgroundColor: 'transparent',
@@ -20,9 +21,10 @@ export const reactToggle = {
 
 const toggleLabelBase = {
   fontSize: 11,
+  display: '-webkit-flex',
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  WebkitAlignItems: 'center',
+  WebkitJustifyContent: 'center',
   fontFamily: "'Helvetica Neue', Helvetica, sans-serif",
 }
 
@@ -42,9 +44,10 @@ export const reactToggleTrack = {
   height: '20px',
   padding: 0,
   borderRadius: '26px',
+  display: '-webkit-flex',
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  WebkitAlignItems: 'center',
+  WebkitJustifyContent: 'center',
 }
 
 export const reactToggleOn = {
@@ -76,8 +79,9 @@ export const reactToggleOff = {
 export const reactToggleThumb = {
   width: '18px',
   height: '18px',
+  display: '-webkit-flex',
   display: 'flex',
-  alignSelf: 'center',
+  WebkitAlignSelf: 'center',
   boxShadow: '0 0 0 1px rgba(0,0,0,0.3)',
   borderRadius: '50%',
   WebkitBoxSizing: 'border-box',
@@ -90,9 +94,11 @@ export const reactThumbCenteringContainer = {
   height: '100%',
   top: 0,
   left: 0,
+  display: '-webkit-flex',
   display: 'flex',
+  WebkitFlex: 1,
   flex: 1,
-  alignSelf: 'stretch',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
+  WebkitAlignSelf: 'stretch',
+  WebkitAlignItems: 'center',
+  WebkitJustifyContent: 'flex-start',
 }
