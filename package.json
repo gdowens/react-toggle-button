@@ -1,6 +1,6 @@
 {
   "name": "reactjs-toggle-button",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A React Component.",
   "main": "./lib/index.js",
   "scripts": {
@@ -39,7 +39,7 @@
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-jest": "^19.0.0",
-    "babel-loader": "^7.0.0",
+    "babel-loader": "6.0.0",
     "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
