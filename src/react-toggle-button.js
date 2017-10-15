@@ -220,24 +220,49 @@ export default class ToggleButton extends Component {
   }
 
   render() {
-    const SpringConfig = this.props.internalSpringSetting
-    const HoverSpringConfig = this.props.internalHoverSpringSetting
+    const { 
+      internalSpringSetting,
+      internalHoverSpringSetting,
+      value,
+      thumbAnimateRange,
+      isHover,
+      containerStyle,
+      trackStyle,
+      animateTrackStyleToggle,
+      trackStyleHover,
+      activeLabelStyle,
+      activeLabelStyleHover,
+      activeLabel,
+      inactiveLabelStyle,
+      inactiveLabelStyleHover,
+      inactiveLabel,
+      thumbStyle,
+      animateThumbStyleHover,
+      animateThumbStyleToggle,
+      thumbIcon,
+      onClick,
+      onToggle,
+      passThroughInputProps
+     } = this.props;
+
+    const SpringConfig = internalSpringSetting
+    const HoverSpringConfig = internalHoverSpringSetting
     return (
       <Motion style={{
-          opacity: spring(this.props.value ? 1 : 0, SpringConfig),
+          opacity: spring(value ? 1 : 0, SpringConfig),
           left: spring(
-            this.props.value ? this.props.thumbAnimateRange[1]*10 : this.props.thumbAnimateRange[0]*10,
+            value ? thumbAnimateRange[1]*10 : thumbAnimateRange[0]*10,
             SpringConfig
           ),
-          colorNumber: spring(this.props.value ? 0 : 400, SpringConfig),
-          toggleNumber: spring(this.props.value ? 400 : 0, SpringConfig),
+          colorNumber: spring(value ? 0 : 400, SpringConfig),
+          toggleNumber: spring(value ? 400 : 0, SpringConfig),
           hoverNumber: spring(this.state.isHover ? 400 : 0, HoverSpringConfig),
       }}>
       {({ opacity, left, colorNumber, hoverNumber, toggleNumber }) =>
         <div style={{
             ...this.makeStyle({
               ...reactToggle,
-              ...this.props.containerStyle,
+              ...containerStyle,
             })
           }}
           onMouseOver={this.onMouseOver.bind(this)}
@@ -246,48 +271,48 @@ export default class ToggleButton extends Component {
           <div style={{
               ...this.makeStyle({
                 ...reactToggleTrack,
-                ...this.props.trackStyle,
+                ...trackStyle,
                 ...this.interpolateColorWithHover(colorNumber, 'active', 'inactive'),
-                ...this.props.animateTrackStyleToggle(toggleNumber/400.0),
+                ...animateTrackStyleToggle(toggleNumber/400.0),
               }, {
-                ...this.props.trackStyleHover,
-              ...this.props.animateTrackStyleHover(hoverNumber/400.0),
+                ...trackStyleHover,
+              ...animateTrackStyleHover(hoverNumber/400.0),
               }),
             }}>
             <div style={{
                 ...this.makeStyle({
                   ...reactToggleOn,
-                  ...this.props.activeLabelStyle,
-                }, this.props.activeLabelStyleHover),
+                  ...activeLabelStyle,
+                }, activeLabelStyleHover),
                 opacity: opacity,
               }}>
-              {this.props.activeLabel}
+              {activeLabel}
             </div>
             <div style={{
               ...this.makeStyle({
                 ...reactToggleOff,
-                ...this.props.inactiveLabelStyle,
-              }, this.props.inactiveLabelStyleHover),
+                ...inactiveLabelStyle,
+              }, inactiveLabelStyleHover),
               opacity: 1 - opacity,
               }}>
-              {this.props.inactiveLabel}
+              {inactiveLabel}
             </div>
           </div>
           <div style={reactThumbCenteringContainer}>
             <div style={{
                 ...this.makeStyle({
                   ...reactToggleThumb,
-                  ...this.props.thumbStyle,
+                  ...thumbStyle,
                   ...this.interpolateColorWithHover(colorNumber, 'activeThumb', 'inactiveThumb'),
-                  ...this.props.animateThumbStyleToggle(toggleNumber/400.0),
+                  ...animateThumbStyleToggle(toggleNumber/400.0),
                 }, {
-                  ...this.props.thumbStyleHover,
-                  ...this.props.animateThumbStyleHover(hoverNumber/400.0),
+                  ...thumbStyleHover,
+                  ...animateThumbStyleHover(hoverNumber/400.0),
                 }),
                 position: 'relative',
                 left: Math.round(left/10.0),
               }}>
-              {this.props.thumbIcon}
+              {thumbIcon}
             </div>
           </div>
           <input
@@ -297,14 +322,14 @@ export default class ToggleButton extends Component {
             type="checkbox"
             style={reactToggleScreenReaderOnly}
             onClick={(evt) => {
-              if (this.props.onClick) {
-                this.props.onClick(evt)
+              if (onClick) {
+                onClick(evt)
               }
 
-              this.props.onToggle(this.props.value)
+              onToggle(value)
             }}
-            value={this.props.value}
-            {...this.props.passThroughInputProps}
+            value={value}
+            {...passThroughInputProps}
             />
         </div>
       }
