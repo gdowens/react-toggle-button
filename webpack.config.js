@@ -32,14 +32,15 @@ const config = {
       query: {
         presets: ["es2015","react","stage-0"]
       }
+    },{
+        test: /\.(css)$/, loader: "file?name=[name].[ext]"
     }]
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({comments: false}),
-    new webpack.DefinePlugin({
-      'process.env': {NODE_ENV: JSON.stringify('production')}
-    })
+    // new webpack.DefinePlugin({
+    //   'process.env': {NODE_ENV: JSON.stringify('production')}
+    // })
   ],
 };
 

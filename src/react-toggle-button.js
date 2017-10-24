@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Motion,
   spring
 } from 'react-motion';
-import {
-  reactToggle,
-  reactToggleScreenReaderOnly,
-  reactToggleTrack,
-  reactToggleOn,
-  reactToggleOff,
-  reactToggleThumb,
-  reactThumbCenteringContainer,
-} from './styles'
 
 import {
   rgbToHex,
@@ -37,7 +29,7 @@ const defaultColors = {
     base: `rgb(250,250,250)`,
     hover: `rgb(250,250,250)`,
   },
-}
+};
 
 const emptyStyle = {}
 
@@ -51,41 +43,40 @@ export default class ToggleButton extends Component {
   }
 
   static propTypes = {
-    value: React.PropTypes.bool.isRequired,
-    onToggle: React.PropTypes.func.isRequired,
-    passThroughInputProps: React.PropTypes.object,
-    onClick: React.PropTypes.func,
-    colors: React.PropTypes.object,
-    activeLabel: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.object,
+    value: PropTypes.bool.isRequired,
+    onToggle: PropTypes.func.isRequired,
+    passThroughInputProps: PropTypes.object,
+    colors: PropTypes.object,
+    activeLabel: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
     ]),
-    containerStyle: React.PropTypes.object,
-    activeLabelStyle: React.PropTypes.object,
-    activeLabelStyleHover: React.PropTypes.object,
-    activeThumbStyle: React.PropTypes.object,
-    activeThumbStyleHover: React.PropTypes.object,
-    inactiveLabel: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.object,
+    containerStyle: PropTypes.object,
+    activeLabelStyle: PropTypes.object,
+    activeLabelStyleHover: PropTypes.object,
+    activeThumbStyle: PropTypes.object,
+    activeThumbStyleHover: PropTypes.object,
+    inactiveLabel: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
     ]),
-    inactiveLabelStyle: React.PropTypes.object,
-    inactiveLabelStyleHover: React.PropTypes.object,
-    thumbStyle: React.PropTypes.object,
-    thumbStyleHover: React.PropTypes.object,
-    trackStyle: React.PropTypes.object,
-    trackStyleHover: React.PropTypes.object,
-    animateThumbStyleHover: React.PropTypes.func,
-    animateTrackStyleHover: React.PropTypes.func,
-    animateTrackStyleToggle: React.PropTypes.func,
-    animateThumbStyleToggle: React.PropTypes.func,
-    internalSpringSetting: React.PropTypes.object,
-    internalHoverSpringSetting: React.PropTypes.object,
-    thumbIcon: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.object,
+    inactiveLabelStyle: PropTypes.object,
+    inactiveLabelStyleHover: PropTypes.object,
+    thumbStyle: PropTypes.object,
+    thumbStyleHover: PropTypes.object,
+    trackStyle: PropTypes.object,
+    trackStyleHover: PropTypes.object,
+    animateThumbStyleHover: PropTypes.func,
+    animateTrackStyleHover: PropTypes.func,
+    animateTrackStyleToggle: PropTypes.func,
+    animateThumbStyleToggle: PropTypes.func,
+    internalSpringSetting: PropTypes.object,
+    internalHoverSpringSetting: PropTypes.object,
+    thumbIcon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
     ]),
-    thumbAnimateRange: React.PropTypes.array,
+    thumbAnimateRange: PropTypes.array,
   }
 
   static defaultProps = {
@@ -234,18 +225,15 @@ export default class ToggleButton extends Component {
           hoverNumber: spring(this.state.isHover ? 400 : 0, HoverSpringConfig),
       }}>
       {({ opacity, left, colorNumber, hoverNumber, toggleNumber }) =>
-        <div style={{
+        <div className="ReactToggle" style={{
             ...this.makeStyle({
-              ...reactToggle,
               ...this.props.containerStyle,
             })
           }}
           onMouseOver={this.onMouseOver.bind(this)}
-          onMouseOut={this.onMouseOut.bind(this)}
-          onClick={this.handleClick.bind(this)}>
-          <div style={{
+          onMouseOut={this.onMouseOut.bind(this)}>
+          <div className="ReactToggleTrack" style={{
               ...this.makeStyle({
-                ...reactToggleTrack,
                 ...this.props.trackStyle,
                 ...this.interpolateColorWithHover(colorNumber, 'active', 'inactive'),
                 ...this.props.animateTrackStyleToggle(toggleNumber/400.0),
@@ -254,18 +242,16 @@ export default class ToggleButton extends Component {
               ...this.props.animateTrackStyleHover(hoverNumber/400.0),
               }),
             }}>
-            <div style={{
+            <div className="ReactToggleOn" style={{
                 ...this.makeStyle({
-                  ...reactToggleOn,
                   ...this.props.activeLabelStyle,
                 }, this.props.activeLabelStyleHover),
                 opacity: opacity,
               }}>
               {this.props.activeLabel}
             </div>
-            <div style={{
+            <div className="ReactToggleOff" style={{
               ...this.makeStyle({
-                ...reactToggleOff,
                 ...this.props.inactiveLabelStyle,
               }, this.props.inactiveLabelStyleHover),
               opacity: 1 - opacity,
@@ -273,10 +259,9 @@ export default class ToggleButton extends Component {
               {this.props.inactiveLabel}
             </div>
           </div>
-          <div style={reactThumbCenteringContainer}>
-            <div style={{
+          <div className="ReactToggleThumbCenteringContainer">
+            <div className="ReactToggleThumb" style={{
                 ...this.makeStyle({
-                  ...reactToggleThumb,
                   ...this.props.thumbStyle,
                   ...this.interpolateColorWithHover(colorNumber, 'activeThumb', 'inactiveThumb'),
                   ...this.props.animateThumbStyleToggle(toggleNumber/400.0),
@@ -295,7 +280,7 @@ export default class ToggleButton extends Component {
               this._input = c
             }}
             type="checkbox"
-            style={reactToggleScreenReaderOnly}
+            className="ReactToggleScreenReaderOnly"
             onClick={(evt) => {
               if (this.props.onClick) {
                 this.props.onClick(evt)

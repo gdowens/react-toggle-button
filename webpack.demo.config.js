@@ -23,19 +23,21 @@ const config = {
     contentBase: "./demo",
     colors: true,
     historyApiFallback: true,
-    inline: true
+    inline: true,
+    port: 8008,
+    stats: 'errors-only',
   },
 
 }
 
 if (process.env.NODE_ENV === 'production') {
-  config.devtool = false;
+  config.devtool = '#inline-source-map';
   config.plugins = [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({comments: false}),
-    new webpack.DefinePlugin({
-      'process.env': {NODE_ENV: JSON.stringify('production')}
-    })
+    // new webpack.optimize.UglifyJsPlugin({comments: false}),
+    // new webpack.DefinePlugin({
+    //   'process.env': {NODE_ENV: JSON.stringify('production')}
+    // })
   ];
 };
 
