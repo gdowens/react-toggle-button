@@ -1,0 +1,146 @@
+.ReactToggle {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 52px;
+    position: relative;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.ReactToggleLabelBase {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 11px;
+}
+
+.ReactToggleScreenReaderOnly {
+    position: absolute;
+    padding: 0;
+    margin: -1px;
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.ReactToggleTrack {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0;
+    height: 20px;
+    width: 52px;
+    border-radius: 26px;
+}
+
+.ReactToggleOn {
+    position: relative;
+    left: 4px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 20px;
+    width: 26px;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 11px;
+    color: #FAFAFA;
+    line-height: 0;
+    opacity: 0;
+}
+
+.ReactToggleOff {
+    position: relative;
+    bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-right: 5px;
+    height: 20px;
+    width: 26px;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    line-height: 0;
+}
+
+.ReactToggleThumb {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+}
+
+.ReactToggleThumbCenteringContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+}
