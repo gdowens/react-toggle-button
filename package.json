@@ -1,6 +1,6 @@
 {
   "name": "react-toggle-button",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A React Component.",
   "main": "./lib/index.js",
   "scripts": {
@@ -20,7 +20,8 @@
     "keywords": [
       "react",
       "reactjs",
-      "react-component"
+      "react-component",
+      "toggle-button"
     ]
   },
   "author": "",
@@ -32,8 +33,7 @@
   "jest": {
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
-      "<rootDir>/node_modules/react-dom",
-      "<rootDir>/node_modules/react-addons-test-utils"
+      "<rootDir>/node_modules/react-dom"
     ]
   },
   "devDependencies": {
@@ -50,11 +50,8 @@
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
     "jest-cli": "^13.0.0",
-    "react": "^15.3.1",
-    "react-addons-css-transition-group": "^15.1.0",
-    "react-addons-perf": "^15.1.0",
-    "react-addons-test-utils": "^15.1.0",
-    "react-dom": "^15.3.1",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   },
@@ -63,6 +60,6 @@
   },
   "dependencies": {
     "prop-types": "^15.6.0",
-    "react-motion": "^0.4.4"
+    "react-motion": "^0.5.2"
   }
 }

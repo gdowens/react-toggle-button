@@ -192,6 +192,8 @@ export default class ToggleButton extends Component {
       containerStyle,
       trackStyle,
       animateTrackStyleToggle,
+      animateTrackStyleHover,
+      thumbStyleHover,
       trackStyleHover,
       activeLabelStyle,
       activeLabelStyleHover,
