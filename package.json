@@ -62,6 +62,7 @@
     "react": ">=0.13.2 || ^0.14 || ^15.0.0"
   },
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react-motion": "^0.4.4"
   }
 }
