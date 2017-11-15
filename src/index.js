@@ -1,3 +1,3 @@
-import ToggleButton from './react-toggle-button'
+import ToggleButton from './react-toggle-button';
 
-module.exports = ToggleButton
+module.exports = ToggleButton;
