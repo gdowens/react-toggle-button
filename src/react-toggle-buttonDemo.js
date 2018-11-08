@@ -476,6 +476,12 @@ ToggleButton.propTypes = {
 
 
   /**
+   * You can pass your own className to the ToggleButton
+   */
+  className: React.PropTypes.string,
+
+
+  /**
    * passes through internal spring settings for react-motion
    * { stiffness, damping }
    */

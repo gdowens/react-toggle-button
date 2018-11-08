@@ -52,6 +52,7 @@ export default class ToggleButton extends Component {
   }
 
   static defaultProps = {
+    className: '',
     value: false,
     onToggle: () => {},
     colors: defaultColors,
@@ -183,7 +184,8 @@ export default class ToggleButton extends Component {
   }
 
   render() {
-    const { 
+    const {
+      className,
       internalSpringSetting,
       internalHoverSpringSetting,
       value,
@@ -232,7 +234,8 @@ export default class ToggleButton extends Component {
           }}
           onMouseOver={this.onMouseOver.bind(this)}
           onMouseOut={this.onMouseOut.bind(this)}
-          onClick={this.handleClick.bind(this)}>
+          onClick={this.handleClick.bind(this)}
+          className={className}>
           <div style={{
               ...this.makeStyle({
                 ...reactToggleTrack,
@@ -304,6 +307,7 @@ export default class ToggleButton extends Component {
 }
 
 ToggleButton.propTypes = {
+  className: PropTypes.string,
   value: PropTypes.bool.isRequired,
   onToggle: PropTypes.func.isRequired,
   passThroughInputProps: PropTypes.object,
