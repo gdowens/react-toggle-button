@@ -16,14 +16,12 @@
     "type": "git",
     "url": "https://github.com/gdowens/react-toggle-button"
   },
-  "keywords": {
-    "keywords": [
-      "react",
-      "reactjs",
-      "react-component",
-      "toggle-button"
-    ]
-  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "react-component",
+    "toggle-button"
+  ],
   "author": "",
   "license": "MIT",
   "bugs": {
